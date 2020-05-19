@@ -467,15 +467,17 @@ bool akvcam_device_prepare_frame(akvcam_device_t self)
         if (default_frame && akvcam_frame_size(default_frame) > 0) {
             frame = default_frame;
             akvcam_object_ref(AKVCAM_TO_OBJECT(frame));
-        } else {
-            frame = akvcam_frame_new(self->format, NULL, 0);
-            get_random_bytes(akvcam_frame_data(frame),
-                             (int) akvcam_frame_size(frame));
-        }
+        } //else {
+          //  frame = akvcam_frame_new(self->format, NULL, 0);
+          //  get_random_bytes(akvcam_frame_data(frame),
+          //                   (int) akvcam_frame_size(frame));
+        //}
     }
 
-    result = akvcam_buffers_write_frame(self->buffers, frame);
-    akvcam_frame_delete(&frame);
+    if (frame) {
+        result = akvcam_buffers_write_frame(self->buffers, frame);
+        akvcam_frame_delete(&frame);
+    }
 
     return result;
 }
