@@ -579,8 +579,8 @@ akvcam_frame_t akvcam_default_frame(void)
     if (loaded)
         akvcam_global_deleter_add(frame,
                                   (akvcam_deleter_t) akvcam_frame_delete);
-    else
-        akvcam_frame_delete(&frame);
+    //else
+    //    akvcam_frame_delete(&frame);
 
     return frame;
 }
